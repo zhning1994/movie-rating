@@ -6,7 +6,11 @@ import "./MovieListing.scss";
 
 export default function MovieListing() {
   const movies = useSelector(getAllMovies);
-  let renderMovies = "";
+  const shows = useSelector(getAllShows);
+
+  let renderMovies,
+    renderShows = "";
+
   renderMovies =
     movies.Response === "True" ? (
       movies.Search.map((movie, index) => (
@@ -18,27 +22,15 @@ export default function MovieListing() {
       </div>
     );
 
-  // const shows = useSelector(getAllShows);
-  // let renderMovies,
-  //   renderShows = "";
-  // renderMovies =
-  //   movies.Response === "True" ? (
-  //     movies.Search.map((movie, index) => (
-  //       <MovieCard key={index} data={movie} />
-  //     ))
-  //   ) : (
-  //     <div className="movies-error">
-  //       <h3>{movies.Error}</h3>
-  //     </div>
-  //   );
-  // renderShows =
-  //   shows.Response === "True" ? (
-  //     shows.Search.map((movie, index) => <MovieCard key={index} data={movie} />)
-  //   ) : (
-  //     <div className="shows-error">
-  //       <h3>{shows.Error}</h3>
-  //     </div>
-  //   );
+  renderShows =
+    shows.Response === "True" ? (
+      shows.Search.map((movie, index) => <MovieCard key={index} data={movie} />)
+    ) : (
+      <div className="shows-error">
+        <h3>{shows.Error}</h3>
+      </div>
+    );
+
   return (
     <div className="movie-wrapper">
       <div className="movie-list">
@@ -47,7 +39,7 @@ export default function MovieListing() {
       </div>
       <div className="show-list">
         <h2>Shows</h2>
-        {/* <div className="movie-container">{renderShows}</div> */}
+        <div className="movie-container">{renderShows}</div>
       </div>
     </div>
   );
